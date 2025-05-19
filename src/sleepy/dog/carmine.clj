@@ -1,7 +1,8 @@
 (ns sleepy.dog.carmine
   (:require [clojure.string :as str]
             [sleepy.dog :refer [with-tracing]]
-            [sleepy.internal :as datadog]))
+            [sleepy.internal :as datadog]
+            [clojure.tools.logging :as log]))
 
 (defn trace-carmine!
   "This depends on carmine-side metadata.
@@ -27,7 +28,9 @@
                (fn [& args]
                  (with-tracing "redis.command"
                    (datadog/set-resource! op)
+                   (log/info "op:" op)
                    (when-let [span (datadog/active-span!)]
+                     (log/info "span:" span)
                      (datadog/tag-span! span "service" "redis")
                      (datadog/tag-span! span "db.operation" op)
                      (datadog/tag-span! span "db.system" "redis"))
