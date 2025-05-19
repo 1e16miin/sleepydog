@@ -69,6 +69,11 @@
       <version>1.11.2</version>
     </dependency>
     <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>tools.logging</artifactId>
+      <version>1.3.0</version>
+    </dependency>
+    <dependency>
       <groupId>com.datadoghq</groupId>
       <artifactId>dd-trace-ot</artifactId>
       <version>1.31.2</version>
